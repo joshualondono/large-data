@@ -157,27 +157,23 @@ const addressList = (data, gender) => {
 
 const dataSet = data.results
 
-dataSet.filter((person) => person.gender === gender).forEach(element => {
+dataSet.filter((person) => person.gender === gender)
+       .forEach(element => {
+  
+       const {name:{title, first, last}, location:{street:{number, name}, city, state, country, postcode}, email, dob:{date} } = element
+       const setDate = new Date(date);
+       const formattedDate =  setDate.toLocaleDateString().replace('/', '-').replace('/', '-')
+       
+       console.log(
 
-const {name:{title, first, last}, location:{street:{number, name}, city, state, country, postcode}, email, dob:{date} } = element
-
-const setDate = new Date(date);
-const formattedDate =  setDate.toLocaleDateString().replace('/', '-').replace('/', '-')
-
-console.log(
-
-`${title}. ${first} ${last}
- ${number} ${name} 
- ${city}, ${state}
- ${country} ${postcode}
- Email: ${email}
- Birthday: ${formattedDate}
- -----------------------
-`
-)
-
-})
-
-}
+        `${title}. ${first} ${last}
+         ${number} ${name} 
+         ${city}, ${state}
+         ${country} ${postcode}
+         Email: ${email}
+         Birthday: ${formattedDate}
+         -----------------------
+        `
+        )})}
 
 addressList(data,'male')
